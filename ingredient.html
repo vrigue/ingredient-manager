@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingredient</title>
+    <title>Ingredient Details</title>
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -53,7 +53,7 @@
             </div>
 
             <div class = "col s6 right-align">
-                <a class = "btn waves-effect waves-light purple darken-3" href = "inventory.html">
+                <a class = "btn waves-effect waves-light purple darken-3">
                     <i class = "material-icons right">delete</i>
                     Delete!
                 </a>
@@ -68,7 +68,6 @@
                     <th>Ingredient:</th>
                     <th>Current Quantity:</th>
                     <th>Quantity to Purchase:</th>
-                    <th>Description:</th>
                 </tr>
             </thead>
 
@@ -90,7 +89,8 @@
         <table>
             <tr>
                 <th>Description:</th>
-                <td>Dark Brown Sugar has more molasses than Light Brown Sugar, so your chocolate chip cookies and other baked goods will come out much darker in color.</td>
+                <td>Dark brown sugar has more molasses than light brown sugar, so your chocolate 
+                    chip cookies and other baked goods will come out much darker in color.</td>
             </tr>
         </table>
 
@@ -99,15 +99,15 @@
         <table class = "highlight centered">
             <thead>
                 <tr>
-                    <th>Expiration Date</th>
-                    <th>Brand</th>
-                    <th>Price</th>
+                    <th>Expiration Date:</th>
+                    <th>Brand:</th>
+                    <th>Price:</th>
                 </tr>
             </thead>
 
             <tbody>
                 <tr>
-                    <td>11/7/22</td>
+                    <td>10/30/22</td>
                     <td>Lidl</td>
                     <td>$1.75</td>
 
@@ -124,7 +124,7 @@
                 </tr>
 
                 <tr>
-                    <td>10/30/22</td>
+                    <td>11/7/22</td>
                     <td>ShopRite</td>
                     <td>$1.99</td>
 
@@ -144,7 +144,7 @@
     </div>
 
     <div class = "container">
-        <h2 class = "left-align">Add More Ingredients!</h2>
+        <h2 class = "left-align">Restock Ingredients!</h2>
         <form>
             <div class = "row valign-wrapper">
                 <div class = "input-field col s3">
@@ -193,6 +193,12 @@
                         <input type = "number" name = "purchaseQuantity" id = "purchaseQuantityInput" required>
                     </div>    
                 </div>
+                <div class = "row">
+                    <div class = "input-field col s12">
+                        <label for = "descInput">Description:</label>
+                        <input type = "text" name = "description" id = "descInput" class = "validate" data-length = "100" required>
+                    </div>
+                </div>
 
                 <div class = "modal-footer">
                     <button class = "modal-close waves-effect btn-flat">Never Mind!</button>
@@ -208,7 +214,7 @@
     <div class = "modal" id = "stuffEdit">
         <div class = "modal-content">
 
-            <h2>Edit Item:</h2>
+            <h2>Edit Unit:</h2>
             <form>
                 <div class = "row">
                     <div class = "input-field col s4">
