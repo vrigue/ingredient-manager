@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredient Inventory</title>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        html {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+        }
+
+        form {
+            border: solid 2px rgb(183, 159, 192);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        form:focus-within {
+            border-color: purple;
+        }
+    </style>
+</head>
+<body class = "purple lighten-5">
+    <div class = "container left-align">
+        <h1 class = "left-align">Ingredients:</h1>
+            <table class = "highlight centered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Current Quantity</th>
+                        <th>Quantity to Purchase</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Dark Brown Sugar</td>
+                        <td>2</td>
+                        <td>4</td>
+
+                        <td>
+                            <a class = "btn-small waves-effect waves-light purple lighten-1" href = "ingredient.html">
+                               <i class = "material-icons right">edit</i>
+                                More Info / Edit
+                            </a>
+                            <a class = "btn-small waves-effect waves-light purple darken-2">
+                                <i class = "material-icons right">delete</i>
+                                DELETE
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Bread Flour</td>
+                        <td>0</td>
+                        <td>6</td>
+
+                        <td>
+                            <a class = "btn-small waves-effect waves-light purple lighten-1" href = "ingredient.html">
+                               <i class = "material-icons right">edit</i>
+                                More Info / Edit
+                            </a>
+                            <a class = "btn-small waves-effect waves-light purple darken-2">
+                                <i class = "material-icons right">delete</i>
+                                DELETE
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+
+    <div class = "container">
+        <h2 class = "left-align">Add Ingredients!</h2>
+        <form>
+            <div class = "row valign-wrapper">
+                <div class = "input-field col s3">
+                    <label for = "nameInput">Ingredient Name:</label>
+                    <input type = "text" name = "name" id = "nameInput" class = "validate" data-length = "32" required>
+                </div>
+
+                <div class = "input-field col s3">
+                    <label for = "currentQuantityInput">Current Quantity:</label>
+                    <input type = "number" name = "currentQuantity" id = "currentQuantityInput" required>
+                </div>
+
+                <div class = "input-field col s3">
+                    <label for = "purchaseQuantityInput">Quantity to Purchase:</label>
+                    <input type = "number" name = "purchaseQuantity" id = "purchaseQuantityInput" required>
+                </div>
+
+                <div class = "col s3">
+                    <a class = "btn waves-effect waves-light purple darken-1" type = "submit">
+                        <i class = "material-icons right">send</i>
+                        Submit!
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

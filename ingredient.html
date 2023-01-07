@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredient</title>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+ 
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        html {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+        }
+
+        form {
+            border: solid 2px rgb(183, 159, 192);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        form:focus-within {
+            border-color: purple;
+        }
+
+        modal {
+            width: 3000%;
+            height: 3000%;
+        }
+    </style>
+</head>
+<body class = "purple lighten-5">
+    <div class = "container left-align">
+        <h1 class = "left-align">Ingredient Details:</h1>
+
+        <div class = "row valign-wrapper">
+            <div class = "col s6 left-align">
+                <a class = "btn waves-effect waves-light purple darken-1" href = "inventory.html">
+                    <i class = "material-icons left">arrow_back</i>
+                    Return to Inventory!
+                </a>
+            </div>
+
+            <div class = "col s6 right-align">
+                <a class = "btn waves-effect waves-light purple darken-3" href = "inventory.html">
+                    <i class = "material-icons right">delete</i>
+                    Delete!
+                </a>
+            </div>
+        </div>
+
+        <h2></h2>
+
+        <table class = "centered">
+            <thead>
+                <tr>
+                    <th>Ingredient:</th>
+                    <th>Current Quantity:</th>
+                    <th>Quantity to Purchase:</th>
+                    <th>Description:</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Dark Brown Sugar</td>
+                    <td class = "purple lighten-4">2</td>
+                    <td>4</td>
+
+                    <td>
+                        <a class = "btn-small waves-effect waves-light purple lighten-1 modal-trigger" href = "#generalEdit">
+                            <i class = "material-icons right">edit</i>
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+        </table>
+
+        <table>
+            <tr>
+                <th>Description:</th>
+                <td>Dark Brown Sugar has more molasses than Light Brown Sugar, so your chocolate chip cookies and other baked goods will come out much darker in color.</td>
+            </tr>
+        </table>
+
+        <h2></h2>
+
+        <table class = "highlight centered">
+            <thead>
+                <tr>
+                    <th>Expiration Date</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>11/7/22</td>
+                    <td>Lidl</td>
+                    <td>$1.75</td>
+
+                    <td>
+                        <a class = "btn-small waves-effect waves-light purple lighten-1 modal-trigger" href = "#stuffEdit">
+                            <i class = "material-icons right">edit</i>
+                            Edit
+                        </a>
+                        <a class = "btn-small waves-effect waves-light purple darken-2">
+                            <i class = "material-icons right">delete</i>
+                            DELETE
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>10/30/22</td>
+                    <td>ShopRite</td>
+                    <td>$1.99</td>
+
+                    <td>
+                        <a class = "btn-small waves-effect waves-light purple lighten-1 modal-trigger" href = "#stuffEdit">
+                            <i class = "material-icons right">edit</i>
+                            Edit
+                        </a>
+                        <a class = "btn-small waves-effect waves-light purple darken-2">
+                            <i class = "material-icons right">delete</i>
+                            DELETE
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class = "container">
+        <h2 class = "left-align">Add More Ingredients!</h2>
+        <form>
+            <div class = "row valign-wrapper">
+                <div class = "input-field col s3">
+                    <label for = "expirationInput">Expiration Date:</label>
+                    <input type = "text" class = "datepicker" name = "expiration" id = "expirationInput" class = "validate" required>
+                </div>
+
+                <div class = "input-field col s3">
+                    <label for = "brandInput">Brand Name:</label>
+                    <input type = "text" name = "brand" id = "brandInput" class = "validate" data-length = "32" required>
+                </div>
+
+                <div class = "input-field col s3">
+                    <label for = "priceInput">Price:</label>
+                    <input type = "number" name = "price" id = "priceInput" required>
+                </div>
+
+                <div class = "valign-wrapper col s3">
+                    <a class = "btn waves-effect waves-light purple darken-1" type = "submit">
+                        <i class = "material-icons right">send</i>
+                        Submit!
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class = "modal" id = "generalEdit">
+        <div class = "modal-content">
+
+            <h2>Edit Ingredient:</h2>
+            <form>
+                <div class = "row">
+                    <div class = "input-field col s4">
+                        <label for = "nameInput">Ingredient Name:</label>
+                        <input type = "text" name = "name" id = "nameInput" class = "validate" data-length = "32" required>
+                    </div>
+    
+                    <div class = "input-field col s4">
+                        <label for = "currentQuantityInput">Current Quantity:</label>
+                        <input type = "number" name = "currentQuantity" id = "currentQuantityInput" required>
+                    </div>
+    
+                    <div class = "input-field col s4">
+                        <label for = "purchaseQuantityInput">Quantity to Purchase:</label>
+                        <input type = "number" name = "purchaseQuantity" id = "purchaseQuantityInput" required>
+                    </div>    
+                </div>
+
+                <div class = "modal-footer">
+                    <button class = "modal-close waves-effect btn-flat">Never Mind!</button>
+                    <button class = "btn waves-effect waves-light purple darken-1" type = "submit">
+                        <i class = "material-icons right">send</i>
+                        Submit!
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class = "modal" id = "stuffEdit">
+        <div class = "modal-content">
+
+            <h2>Edit Item:</h2>
+            <form>
+                <div class = "row">
+                    <div class = "input-field col s4">
+                        <label for = "expirationInput">Expiration Date:</label>
+                        <input type = "text" class = "datepicker" name = "expiration" id = "expirationInput" class = "validate" required>
+                    </div>
+    
+                    <div class = "input-field col s4">
+                        <label for = "brandInput">Brand Name:</label>
+                        <input type = "text" name = "brand" id = "brandInput" class = "validate" data-length = "32" required>
+                    </div>
+    
+                    <div class = "input-field col s4">
+                        <label for = "priceInput">Price:</label>
+                        <input type = "number" name = "price" id = "priceInput" required>
+                    </div>
+                </div>
+
+                <div class = "modal-footer">
+                    <button class = "modal-close waves-effect btn-flat">Never Mind!</button>
+                    <button class = "btn waves-effect waves-light purple darken-1" type = "submit">
+                        <i class = "material-icons right">send</i>
+                        Submit!
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- initialize Materialize elements -->
+    <script> 
+        M.AutoInit();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.datepicker');
+            var instances = M.Datepicker.init(elems, options);
+        });
+    </script>
+</body>
+</html>
