@@ -1,0 +1,22 @@
+html {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+form {
+    border: solid 2px rgb(183, 159, 192);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+form:focus-within {
+    border-color: purple;
+}
+
+.modal {
+    width: 85% !important;
+}
+
+.datepicker-modal {
+    width: 75% !important;
+    max-height: 75% !important;
+}
