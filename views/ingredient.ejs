@@ -35,7 +35,7 @@
             </div>
 
             <div class = "col s6 right-align">
-                <a class = "btn waves-effect waves-light purple darken-3">
+                <a class = "btn waves-effect waves-light purple darken-3" href = <%= "/inventory/ingredient/" + data.ingredient.id + "/delete"%>>
                     <i class = "material-icons right">delete</i>
                     Delete!
                 </a>
@@ -55,9 +55,9 @@
 
             <tbody>
                 <tr>
-                    <td>Dark Brown Sugar</td>
-                    <td class = "purple lighten-4">2</td>
-                    <td>4</td>
+                    <td> <%= data.ingredient.item %> </td>
+                    <td class = "purple lighten-4"> <%= data.ingredient.quantity %> </td>
+                    <td> <%= data.ingredient.purchaseQuantity %> </td>
 
                     <td>
                         <a class = "btn-small waves-effect waves-light purple lighten-1 modal-trigger" href = "#generalEdit">
@@ -71,8 +71,7 @@
         <table>
             <tr>
                 <th>Description:</th>
-                <td>Dark brown sugar has more molasses than light brown sugar, so your chocolate 
-                    chip cookies and other baked goods will come out much darker in color.</td>
+                <td> <%= data.ingredient.description %> </td>
             </tr>
         </table>
 
@@ -88,10 +87,11 @@
             </thead>
 
             <tbody>
+                <% for (let i = 0; i < data.stock.length; i++) { %>
                 <tr>
-                    <td>10/30/22</td>
-                    <td>Lidl</td>
-                    <td>$1.75</td>
+                    <td><%= data.stock[i].expiration_date %></td>
+                    <td><%= data.stock[i].brand_name %></td>
+                    <td><%= data.stock[i].price %></td>
 
                     <td>
                         <a class = "btn-small waves-effect waves-light purple lighten-1 modal-trigger" href = "#stuffEdit">
@@ -104,23 +104,7 @@
                         </a>
                     </td>
                 </tr>
-
-                <tr>
-                    <td>11/7/22</td>
-                    <td>ShopRite</td>
-                    <td>$1.99</td>
-
-                    <td>
-                        <a class = "btn-small waves-effect waves-light purple lighten-1 modal-trigger" href = "#stuffEdit">
-                            <i class = "material-icons right">edit</i>
-                            Edit
-                        </a>
-                        <a class = "btn-small waves-effect waves-light purple darken-2">
-                            <i class = "material-icons right">delete</i>
-                            DELETE
-                        </a>
-                    </td>
-                </tr>
+                <% } %>
             </tbody>
         </table>
     </div>

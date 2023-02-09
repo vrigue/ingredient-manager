@@ -34,39 +34,25 @@
             </thead>
 
             <tbody>
-                <tr>
-                    <td>Dark Brown Sugar</td>
-                    <td>2</td>
-                    <td>4</td>
+                <% for (let i = 0; i < ingredient.length; i++) { %>
+                    <tr>
+                        <td><%= ingredient[i].item %></td>
+                        <td><%= ingredient[i].quantity %></td>
+                        <td><%= ingredient[i].purchaseQuantity %></td>
 
-                    <td>
-                        <a class = "btn-small waves-effect waves-light purple lighten-1" href = "/inventory/ingredient">
-                            <i class = "material-icons right">edit</i>
-                            More Info / Edit
-                        </a>
-                        <a class = "btn-small waves-effect waves-light purple darken-2">
-                            <i class = "material-icons right">delete</i>
-                            DELETE
-                        </a>
-                    </td>
-                </tr>
+                        <td>
+                            <a class = "btn-small waves-effect waves-light purple lighten-1" href = <%= "/inventory/ingredient/" + ingredient[i].id %>>
+                                <i class = "material-icons right">edit</i>
+                                More Info / Edit
+                            </a>
+                            <a class = "btn-small waves-effect waves-light purple darken-2" href = <%= "/inventory/ingredient/" + ingredient[i].id + "/delete"%>>
+                                <i class = "material-icons right">delete</i>
+                                DELETE
+                            </a>
+                        </td>
 
-                <tr>
-                    <td>Bread Flour</td>
-                    <td>0</td>
-                    <td>6</td>
-
-                    <td>
-                        <a class = "btn-small waves-effect waves-light purple lighten-1" href = "/inventory/ingredient">
-                            <i class = "material-icons right">edit</i>
-                            More Info / Edit
-                        </a>
-                        <a class = "btn-small waves-effect waves-light purple darken-2">
-                            <i class = "material-icons right">delete</i>
-                            DELETE
-                        </a>
-                    </td>
-                </tr>
+                    </tr>
+                <% } %>
             </tbody>
         </table>
     </div>
