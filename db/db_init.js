@@ -15,7 +15,7 @@ const create_ingredient_table_sql = `
         item VARCHAR(45) NOT NULL,
         quantity INT NOT NULL,
         purchaseQuantity INT NOT NULL,
-        description VARCHAR(1000) NOT NULL,
+        description VARCHAR(1000) NULL,
         PRIMARY KEY (id)
     );
 `
@@ -47,11 +47,11 @@ const insert_ingredient_table_sql = `
     VALUES 
         (?, ?, ?, ?);
 `
-db.execute(insert_ingredient_table_sql, ['Dark Brown Sugar', '2', '4', 'Dark brown sugar has more molasses than light brown sugar, so your chocolate chip cookies and other baked goods will come out much darker in color.']);
+db.execute(insert_ingredient_table_sql, ['Dark Brown Sugar', '2', '3', 'Dark brown sugar has more molasses than light brown sugar, so your chocolate chip cookies and other baked goods will come out much darker in color.']);
 
-db.execute(insert_ingredient_table_sql, ['Bread Flour', '0', '6', 'Bread flour has more gluten or protein than regular all-purpose flour.']);
+db.execute(insert_ingredient_table_sql, ['Bread Flour', '2', '6', 'Bread flour has more gluten or protein than regular all-purpose flour.']);
 
-db.execute(insert_ingredient_table_sql, ['White Sugar', '12', '0', 'White sugar is arguably the most used ingredient in baking.']);
+db.execute(insert_ingredient_table_sql, ['White Sugar', '0', '5', 'White sugar is arguably the most used ingredient in baking.']);
 
 db.execute(insert_ingredient_table_sql, ['Ube Powder', '4', '2', 'Great for making any ube dessert, especially ube cheese pandesal!']);
 
@@ -65,10 +65,15 @@ const insert_stock_table_sql = `
 `
 
 db.execute(insert_stock_table_sql, ['2023-02-28', 'Lidl', '1.75', '1']);
-
 db.execute(insert_stock_table_sql, ['2023-04-15', 'Aldi', '1.25', '1']);
 
-db.execute(insert_stock_table_sql, ['2023-07-26', 'ShopRite', '2.10', '1']);
+db.execute(insert_stock_table_sql, ['2024-01-26', 'White Lily', '2.50', '2']);
+db.execute(insert_stock_table_sql, ['2025-05-17', 'King Arthur', '1.13', '2']);
+
+db.execute(insert_stock_table_sql, ['2022-03-13', 'Giron Foods', '3.20', '4']);
+db.execute(insert_stock_table_sql, ['2024-09-07', 'Giron Foods', '3.75', '4']);
+db.execute(insert_stock_table_sql, ['2025-04-16', 'Pureblends', '5.75', '4']);
+db.execute(insert_stock_table_sql, ['2025-12-08', 'Achievers', '4.99', '4']);
 
 
 /**** Read the sample ingredients inserted ****/

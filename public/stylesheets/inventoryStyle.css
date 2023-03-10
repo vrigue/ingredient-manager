@@ -2,6 +2,10 @@ html {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 
+button {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
 form {
     border: solid 2px rgb(183, 159, 192);
     padding: 10px;

@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingredient Inventory</title>
 
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="favicon_io/site.webmanifest">
+
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -15,11 +20,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel = "stylesheet" href = "/stylesheets/inventoryStyle.css">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="favicon_io/site.webmanifest">
 </head>
 <body class = "purple lighten-5">
     <div class = "container left-align">
@@ -59,7 +59,7 @@
 
     <div class = "container">
         <h2 class = "left-align">Add New Ingredients!</h2>
-        <form>
+        <form method = "post" action = "/inventory">
             <div class = "row valign-wrapper">
                 <div class = "input-field col s3">
                     <label for = "nameInput">Ingredient Name:</label>
@@ -77,10 +77,10 @@
                 </div>
 
                 <div class = "col s3">
-                    <a class = "btn waves-effect waves-light purple darken-1" type = "submit">
+                    <button class = "btn waves-effect waves-light purple darken-1" type = "submit">
                         <i class = "material-icons right">send</i>
                         Submit!
-                    </a>
+                    </button>
                 </div>
             </div>
         </form>
