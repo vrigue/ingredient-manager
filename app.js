@@ -2,10 +2,39 @@
 const express = require( "express" );
 const logger = require("morgan");
 const app = express();
-const port = 8080;
-const db = require("./db/db_connection");
+const port = process.env.PORT || 8080;
+const db = require("./db/db_pool");
+const helmet = require("helmet");
+const { auth } = require('express-openid-connect');
+const { requiresAuth } = require('express-openid-connect');
+const dotenv = require('dotenv');
+dotenv.config();
+
 app.set( "views",  __dirname + "/views");
 app.set( "view engine", "ejs" );
+
+// configure Express to use certain HTTP headers for security
+// explicitly set the CSP to allow certain sources
+app.use( helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", 'cdnjs.cloudflare.com']
+      }
+    }
+  })); 
+
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    secret: process.env.AUTH0_SECRET,
+    baseURL: process.env.AUTH0_BASE_URL,
+    clientID: process.env.AUTH0_CLIENT_ID,
+    issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL
+  };
+
+/* auth router attaches /login, /logout, and /callback routes to the baseURL */
+app.use(auth(config));
 
 /* define middleware that logs all incoming requests */
 app.use(logger("dev"));
@@ -16,22 +45,41 @@ app.use(express.static(__dirname + '/public'));
 // configure Express to parse URL-encoded POST request bodies (traditional forms)
 app.use( express.urlencoded({ extended: false }) );
 
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = req.oidc.isAuthenticated();
+    res.locals.user = req.oidc.user;
+    next();
+})
+
 /* define a route for the default home page */
 app.get( "/", ( req, res ) => {
     res.render("index");
-} );
+});
 
+/* req.isAuthenticated is provided from the auth router */
+app.get('/authtest', (req, res) => {
+    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+});
+
+/* causes all route handlers below to require AUTHENTICATION*/
+app.use(requiresAuth());
+
+app.get('/profile', (req, res) => {
+    res.send(JSON.stringify(req.oidc.user));
+});
 
 const read_ingredient_all_sql = `
 SELECT
     id, item, quantity, purchaseQuantity, description
 FROM
-    ingredient;
+    ingredient
+WHERE
+    userid = ?;
 `
 
 /* define a route for the inventory page */
 app.get( "/inventory", ( req, res ) => {
-    db.execute(read_ingredient_all_sql, (error, results) => {
+    db.execute(read_ingredient_all_sql, [req.oidc.user.email], (error, results) => {
         if (error) {
             res.status(500).send(error); /* sends an internal server error if something goes wrong */
         } else {
@@ -47,7 +95,9 @@ const read_ingredient_sql = `
     FROM
         ingredient
     WHERE 
-        id = ?;
+        id = ?
+    AND
+        userid = ?;
 `
 
 const read_ingredient_stock_sql = `
@@ -61,7 +111,7 @@ const read_ingredient_stock_sql = `
 
 /* define a route for the ingredient detail page */
 app.get( "/inventory/ingredient/:id", ( req, res ) => {
-    db.execute(read_ingredient_sql, [req.params.id], (error, results1) => {
+    db.execute(read_ingredient_sql, [req.params.id, req.oidc.user.email], (error, results1) => {
         if (error) {
             res.status(500).send(error); /* sends an internal server error if something goes wrong */
         } else if (results1.length === 0) {
@@ -85,6 +135,8 @@ const delete_ingredient_sql = `
             ingredient
         WHERE
             id = ?
+        AND
+            userid = ?
 `
 
 const delete_ingredient_stock_sql = `
@@ -101,7 +153,7 @@ app.get("/inventory/ingredient/:id/delete", ( req, res ) => {
         if (error)
             res.status(500).send(error); /* sends an internal server error if something goes wrong */
         else {
-            db.execute(delete_ingredient_sql, [req.params.id], (error, results2) => {
+            db.execute(delete_ingredient_sql, [req.params.id, req.oidc.user.email], (error, results2) => {
                 if (error)
                     res.status(500).send(error); /* sends an internal server error if something goes wrong */
                 else {
@@ -135,14 +187,14 @@ app.get("/inventory/ingredient/:ingredient_id/stock/:id/delete", ( req, res ) =>
 
 const create_ingredient_sql = `
     INSERT INTO ingredient
-        (item, quantity, purchaseQuantity)
+        (item, quantity, purchaseQuantity, userid)
     VALUES
-        (?, ?, ?)
+        (?, ?, ?, ?)
 `
 
 /* define a route for ingredient CREATE */
 app.post("/inventory", ( req, res ) => {
-    db.execute(create_ingredient_sql, [req.body.name, req.body.currentQuantity, req.body.purchaseQuantity], (error, results) => {
+    db.execute(create_ingredient_sql, [req.body.name, req.body.currentQuantity, req.body.purchaseQuantity, req.oidc.user.email], (error, results) => {
         if (error)
             res.status(500).send(error); /* sends an internal server error if something goes wrong */
         else {
@@ -183,10 +235,12 @@ const update_ingredient_sql = `
         description = ?
     WHERE
         id = ?
+    AND
+        userid = ?
 `
 /* define a route for ingredient UPDATE */
 app.post("/inventory/ingredient/:id", ( req, res ) => {
-    db.execute(update_ingredient_sql, [req.body.name, req.body.currentQuantity, req.body.purchaseQuantity, req.body.description, req.params.id], (error, results) => {
+    db.execute(update_ingredient_sql, [req.body.name, req.body.currentQuantity, req.body.purchaseQuantity, req.body.description, req.params.id, req.oidc.user.email], (error, results) => {
         if (error)
             res.status(500).send(error); //Internal Server Error
         else {

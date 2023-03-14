@@ -16,6 +16,7 @@ const create_ingredient_table_sql = `
         quantity INT NOT NULL,
         purchaseQuantity INT NOT NULL,
         description VARCHAR(1000) NULL,
+        userid VARCHAR(50) NULL, 
         PRIMARY KEY (id)
     );
 `
