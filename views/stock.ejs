@@ -56,67 +56,81 @@
 
     <!-- Rest of the Body -->
     <div class = "container left-align">
-        <h1 class = "left-align">Ingredients:</h1>
-        <table class = "highlight centered">
+        <h1 class = "left-align">Stock Unit Details:</h1>
+
+        <div class = "row valign-wrapper">
+            <div class = "col s6 left-align">
+                <a class = "btn waves-effect waves-light purple darken-1" href = <%= "/inventory/ingredient/" + data.ingredient.id %>>
+                    <i class = "material-icons left">arrow_back</i>
+                    Return to <%= data.ingredient.item %>!
+                </a>
+        </div>
+
+            <div class = "col s6 right-align">
+                <a class = "btn waves-effect waves-light purple darken-3" href = <%= "/inventory/ingredient/" + data.ingredient.id + "/stock/" + data.stock.id + "/delete"%>>
+                    <i class = "material-icons right">delete</i>
+                    Delete!
+                </a>
+            </div>
+        </div>
+
+        <table class = "centered">
             <thead>
                 <tr>
-                    <th>Name:</th>
-                    <th>Current Quantity:</th>
-                    <th>Quantity to Purchase:</th>
+                    <th>Expiration Date:</th>
+                    <th>Brand:</th>
+                    <th>Price:</th>
                 </tr>
             </thead>
 
             <tbody>
-                <% for (let i = 0; i < ingredient.length; i++) { %>
-                    <tr>
-                        <td><%= ingredient[i].item %></td>
-                        <td><%= ingredient[i].quantity %></td>
-                        <td><%= ingredient[i].purchaseQuantity %></td>
+                <tr>
+                    <td class = "purple lighten-4"><%= data.stock.expiration_date %></td>
+                    <td><%= data.stock.brand_name %></td>
+                    <td><%= data.stock.price %></td>
 
-                        <td>
-                            <a class = "btn-small waves-effect waves-light purple lighten-1" href = <%= "/inventory/ingredient/" + ingredient[i].id %>>
-                                <i class = "material-icons right">info</i>
-                                More Info
-                            </a>
-                            <a class = "btn-small waves-effect waves-light purple darken-2" href = <%= "/inventory/ingredient/" + ingredient[i].id + "/delete"%>>
-                                <i class = "material-icons right">delete</i>
-                                DELETE
-                            </a>
-                        </td>
-
-                    </tr>
-                <% } %>
+                    <td>
+                        <a class = "btn-small waves-effect waves-light purple lighten-1 modal-trigger" href = "#stockEdit">
+                            <i class = "material-icons right">edit</i>
+                            Edit
+                        </a>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
 
-    <div class = "container">
-        <h2 class = "left-align">Add New Ingredients!</h2>
-        <form method = "post" action = "/inventory">
-            <div class = "row valign-wrapper">
-                <div class = "input-field col s3">
-                    <label for = "nameInput">Ingredient Name:</label>
-                    <input type = "text" name = "name" id = "nameInput" class = "validate" data-length = "32" required>
+    <div class = "modal" id = "stockEdit">
+        <div class = "modal-content">
+
+            <h2>Edit Stock Unit:</h2>                       
+            <form method = "post" action = "/inventory/ingredient/<%= data.ingredient.id %>/stock/<%= data.stock.id %>">
+                <div class = "row">
+                    <div class = "input-field col s4">
+                        <label for = "newExpirationInput">Expiration Date:</label>
+                        <input type = "text" name = "expiration" id = "newExpirationInput" class = "validate" value = "<%=data.stock.expiration_date%>" required>
+                    </div>
+    
+                    <div class = "input-field col s4">
+                        <label for = "brandInput">Brand Name:</label>
+                        <input type = "text" name = "brand" id = "brandInput" class = "validate" data-length = "32" value = "<%=data.stock.brand_name%>" required>
+                    </div>
+    
+                    <div class = "input-field col s4">
+                        <label for = "priceInput">Price:</label>
+                        <input type = "number" step = "0.01" name = "price" id = "priceInput" value = "<%=data.stock.price%>" required>
+                    </div>
                 </div>
 
-                <div class = "input-field col s3">
-                    <label for = "currentQuantityInput">Current Quantity:</label>
-                    <input type = "number" name = "currentQuantity" id = "currentQuantityInput" required>
-                </div>
-
-                <div class = "input-field col s3">
-                    <label for = "purchaseQuantityInput">Quantity to Purchase:</label>
-                    <input type = "number" name = "purchaseQuantity" id = "purchaseQuantityInput" required>
-                </div>
-
-                <div class = "col s3">
+                <div class = "modal-footer">
+                    <button class = "modal-close waves-effect btn-flat">Never Mind!</button>
                     <button class = "btn waves-effect waves-light purple darken-1" type = "submit">
                         <i class = "material-icons right">send</i>
                         Submit!
                     </button>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </body>
 </html>

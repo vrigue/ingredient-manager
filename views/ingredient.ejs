@@ -64,7 +64,7 @@
                     <i class = "material-icons left">arrow_back</i>
                     Return to Inventory!
                 </a>
-            </div>
+        </div>
 
             <div class = "col s6 right-align">
                 <a class = "btn waves-effect waves-light purple darken-3" href = <%= "/inventory/ingredient/" + data.ingredient.id + "/delete"%>>
@@ -126,9 +126,9 @@
                     <td><%= data.stock[i].price %></td>
 
                     <td>
-                        <a class = "btn-small waves-effect waves-light purple lighten-1 modal-trigger" href = "#stuffEdit">
-                            <i class = "material-icons right">edit</i>
-                            Edit
+                        <a class = "btn-small waves-effect waves-light purple lighten-1" href = <%= "/inventory/ingredient/" + data.ingredient.id + "/stock/" + data.stock[i].id%>>
+                            <i class = "material-icons right">info</i>
+                            More Info
                         </a>
                         <a class = "btn-small waves-effect waves-light purple darken-2" href = <%= "/inventory/ingredient/" + data.ingredient.id + "/stock/" + data.stock[i].id + "/delete"%>>
                             <i class = "material-icons right">delete</i>
@@ -195,39 +195,6 @@
                     <div class = "input-field col s12">
                         <label for = "descInput">Description:</label>
                         <input type = "text" name = "description" id = "descInput" class = "validate" data-length = "100" value = "<%= data.ingredient.description %>" required>
-                    </div>
-                </div>
-
-                <div class = "modal-footer">
-                    <button class = "modal-close waves-effect btn-flat">Never Mind!</button>
-                    <button class = "btn waves-effect waves-light purple darken-1" type = "submit">
-                        <i class = "material-icons right">send</i>
-                        Submit!
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class = "modal" id = "stuffEdit">
-        <div class = "modal-content">
-
-            <h2>Edit Stock Unit:</h2>                       <!-- yikes this is undefined -->
-            <form method = "post" action = "/inventory/ingredient/stock/<%=data.stock.id%>">
-                <div class = "row">
-                    <div class = "input-field col s4">
-                        <label for = "newExpirationInput">Expiration Date:</label>
-                        <input type = "text" name = "expiration" id = "newExpirationInput" class = "validate" required>
-                    </div>
-    
-                    <div class = "input-field col s4">
-                        <label for = "brandInput">Brand Name:</label>
-                        <input type = "text" name = "brand" id = "brandInput" class = "validate" data-length = "32" required>
-                    </div>
-    
-                    <div class = "input-field col s4">
-                        <label for = "priceInput">Price:</label>
-                        <input type = "number" step = "0.01" name = "price" id = "priceInput" required>
                     </div>
                 </div>
 

@@ -100,7 +100,7 @@ const read_ingredient_sql = `
         userid = ?;
 `
 
-const read_ingredient_stock_sql = `
+const read_ingredient_all_stock_sql = `
     SELECT
         id, ingredient_id, expiration_date, brand_name, price
     FROM
@@ -117,11 +117,41 @@ app.get( "/inventory/ingredient/:id", ( req, res ) => {
         } else if (results1.length === 0) {
             res.status(404).send(`No ingredient found with id = '${req.params.id}`)
         }  else {
-            db.execute(read_ingredient_stock_sql, [req.params.id], (error, results2) => {
+            db.execute(read_ingredient_all_stock_sql, [req.params.id], (error, results2) => {
                 if (error) {
                     res.status(500).send(error); /* sends an internal server error if something goes wrong */
                 }  else {
                     res.render("ingredient", {data : {ingredient : results1[0], stock : results2}});
+                }
+            });
+        }
+    });
+});
+
+const read_ingredient_stock_sql = `
+    SELECT
+        id, ingredient_id, expiration_date, brand_name, price
+    FROM
+        stock
+    WHERE 
+        ingredient_id = ?
+    AND
+        id = ?;
+`
+
+/* define a route for the stock detail page */
+app.get( "/inventory/ingredient/:id/stock/:ingredient_id", ( req, res ) => {
+    db.execute(read_ingredient_sql, [req.params.id, req.oidc.user.email], (error, results1) => {
+        if (error) {
+            res.status(500).send(error); /* sends an internal server error if something goes wrong */
+        } else if (results1.length === 0) {
+            res.status(404).send(`No ingredient found with id = '${req.params.id}`)
+        }  else {
+            db.execute(read_ingredient_stock_sql, [req.params.id, req.params.ingredient_id], (error, results2) => {
+                if (error) {
+                    res.status(500).send(error); /* sends an internal server error if something goes wrong */
+                }  else {
+                    res.render("stock", {data : {ingredient : results1[0], stock : results2[0]}});
                 }
             });
         }
@@ -260,12 +290,12 @@ const update_stock_sql = `
         id = ?
 `
 /* define a route for stock UPDATE */
-app.post("/inventory/ingredient/stock/:ingredient_id", ( req, res ) => {
-    db.execute(update_stock_sql, [req.body.expiration, req.body.brand, req.body.price, req.body.id], (error, results) => {
+app.post("/inventory/ingredient/:id/stock/:ingredient_id", ( req, res ) => {
+    db.execute(update_stock_sql, [req.body.expiration, req.body.brand, req.body.price, req.params.ingredient_id], (error, results) => {
         if (error)
             res.status(500).send(error); //Internal Server Error
         else {
-            res.redirect(`/inventory/ingredient/${req.params.id}`);
+            res.redirect(`/inventory/ingredient/${req.params.id}/stock/${req.params.ingredient_id}`);
         }
     });
 });

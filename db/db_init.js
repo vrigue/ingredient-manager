@@ -24,7 +24,7 @@ const create_ingredient_table_sql = `
 const create_stock_table_sql = `
     CREATE TABLE stock (
         id INT NOT NULL AUTO_INCREMENT,
-        expiration_date VARCHAR(10) NOT NULL,
+        expiration_date DATE NOT NULL,
         brand_name VARCHAR(45) NOT NULL,
         price VARCHAR(45) NOT NULL,
         ingredient_id INT NOT NULL,
