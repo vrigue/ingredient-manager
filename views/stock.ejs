@@ -55,6 +55,7 @@
     </header>
 
     <!-- Rest of the Body -->
+    
     <div class = "container left-align">
         <h1 class = "left-align">Stock Unit Details:</h1>
 
@@ -99,6 +100,7 @@
             </tbody>
         </table>
     </div>
+    
 
     <div class = "modal" id = "stockEdit">
         <div class = "modal-content">
@@ -107,8 +109,8 @@
             <form method = "post" action = "/inventory/ingredient/<%= data.ingredient.id %>/stock/<%= data.stock.id %>">
                 <div class = "row">
                     <div class = "input-field col s4">
+                        <input type = "date" name = "expiration" id = "newExpirationInput" class = "validate" value = "<%=data.stock.expiration_date%>" required>
                         <label for = "newExpirationInput">Expiration Date:</label>
-                        <input type = "text" name = "expiration" id = "newExpirationInput" class = "validate" value = "<%=data.stock.expiration_date%>" required>
                     </div>
     
                     <div class = "input-field col s4">

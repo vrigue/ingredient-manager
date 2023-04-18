@@ -8,12 +8,16 @@ button {
 
 form {
     border: solid 2px rgb(183, 159, 192);
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
 }
 
 form:focus-within {
-    border-color: purple;
+    color: purple;
+}
+
+.space {
+    padding-bottom: 50px;
 }
 
 .modal {

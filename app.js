@@ -102,7 +102,7 @@ const read_ingredient_sql = `
 
 const read_ingredient_all_stock_sql = `
     SELECT
-        id, ingredient_id, expiration_date, brand_name, price
+        id, ingredient_id, DATE_FORMAT(expiration_date, "%W, %M %e, %Y") AS expiration_date, brand_name, price
     FROM
         stock
     WHERE 
@@ -130,7 +130,7 @@ app.get( "/inventory/ingredient/:id", ( req, res ) => {
 
 const read_ingredient_stock_sql = `
     SELECT
-        id, ingredient_id, expiration_date, brand_name, price
+        id, ingredient_id, DATE_FORMAT(expiration_date, "%W, %M %e, %Y") AS expiration_date, brand_name, price
     FROM
         stock
     WHERE 

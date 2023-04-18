@@ -141,33 +141,35 @@
         </table>
     </div>
 
-    <div class = "container">
-        <h2 class = "left-align">Restock Ingredients!</h2>
-        <form method = "post" action = "/inventory/ingredient/<%=data.ingredient.id%>/stock">
-            <div class = "row valign-wrapper">
-                <div class = "input-field col s3">
-                    <label for = "expirationInput">Expiration Date:</label>
-                    <input type = "text" name = "expiration" id = "expirationInput" class = "validate" required>
-                </div>
+    <div class = "space">
+        <div class = "container">
+            <h2 class = "left-align">Restock Ingredients!</h2>
+            <form method = "post" action = "/inventory/ingredient/<%=data.ingredient.id%>/stock">
+                <div class = "row valign-wrapper">
+                    <div class = "input-field col s3">
+                        <input type = "date" name = "expiration" id = "expirationInput" class = "validate" required>
+                        <label for = "expirationInput">Expiration Date:</label>
+                    </div>
 
-                <div class = "input-field col s3">
-                    <label for = "brandInput">Brand Name:</label>
-                    <input type = "text" name = "brand" id = "brandInput" class = "validate" data-length = "32" required>
-                </div>
+                    <div class = "input-field col s3">
+                        <label for = "brandInput">Brand Name:</label>
+                        <input type = "text" name = "brand" id = "brandInput" class = "validate" data-length = "32" required>
+                    </div>
 
-                <div class = "input-field col s3">
-                    <label for = "priceInput">Price:</label>
-                    <input type = "number" step = "0.01" name = "price" id = "priceInput" required>
-                </div>
+                    <div class = "input-field col s3">
+                        <label for = "priceInput">Price:</label>
+                        <input type = "number" step = "0.01" name = "price" id = "priceInput" required>
+                    </div>
 
-                <div class = "valign-wrapper col s3">
-                    <button class = "btn waves-effect waves-light purple darken-1" type = "submit">
-                        <i class = "material-icons right">send</i>
-                        Submit!
-                    </button>
+                    <div class = "valign-wrapper col s3">
+                        <button class = "btn waves-effect waves-light purple darken-1" type = "submit">
+                            <i class = "material-icons right">send</i>
+                            Submit!
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 
     <div class = "modal" id = "generalEdit">
