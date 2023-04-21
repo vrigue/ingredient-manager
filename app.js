@@ -74,12 +74,14 @@ SELECT
 FROM
     ingredient
 WHERE
-    userid = ?;
+    userid = ?
+ORDER BY
+    item;
 `
 
 /* define a route for the inventory page */
 app.get( "/inventory", ( req, res ) => {
-    db.execute(read_ingredient_all_sql, [req.oidc.user.email], (error, results) => {
+    db.execute(read_ingredient_all_sql, [req.oidc.user.sub], (error, results) => {
         if (error) {
             res.status(500).send(error); /* sends an internal server error if something goes wrong */
         } else {
@@ -106,12 +108,14 @@ const read_ingredient_all_stock_sql = `
     FROM
         stock
     WHERE 
-        ingredient_id = ?;
+        ingredient_id = ?
+    ORDER BY
+        expiration_date DESC;
 `
 
 /* define a route for the ingredient detail page */
 app.get( "/inventory/ingredient/:id", ( req, res ) => {
-    db.execute(read_ingredient_sql, [req.params.id, req.oidc.user.email], (error, results1) => {
+    db.execute(read_ingredient_sql, [req.params.id, req.oidc.user.sub], (error, results1) => {
         if (error) {
             res.status(500).send(error); /* sends an internal server error if something goes wrong */
         } else if (results1.length === 0) {
@@ -141,7 +145,7 @@ const read_ingredient_stock_sql = `
 
 /* define a route for the stock detail page */
 app.get( "/inventory/ingredient/:id/stock/:ingredient_id", ( req, res ) => {
-    db.execute(read_ingredient_sql, [req.params.id, req.oidc.user.email], (error, results1) => {
+    db.execute(read_ingredient_sql, [req.params.id, req.oidc.user.sub], (error, results1) => {
         if (error) {
             res.status(500).send(error); /* sends an internal server error if something goes wrong */
         } else if (results1.length === 0) {
@@ -183,7 +187,7 @@ app.get("/inventory/ingredient/:id/delete", ( req, res ) => {
         if (error)
             res.status(500).send(error); /* sends an internal server error if something goes wrong */
         else {
-            db.execute(delete_ingredient_sql, [req.params.id, req.oidc.user.email], (error, results2) => {
+            db.execute(delete_ingredient_sql, [req.params.id, req.oidc.user.sub], (error, results2) => {
                 if (error)
                     res.status(500).send(error); /* sends an internal server error if something goes wrong */
                 else {
@@ -224,7 +228,7 @@ const create_ingredient_sql = `
 
 /* define a route for ingredient CREATE */
 app.post("/inventory", ( req, res ) => {
-    db.execute(create_ingredient_sql, [req.body.name, req.body.currentQuantity, req.body.purchaseQuantity, req.oidc.user.email], (error, results) => {
+    db.execute(create_ingredient_sql, [req.body.name, req.body.currentQuantity, req.body.purchaseQuantity, req.oidc.user.sub], (error, results) => {
         if (error)
             res.status(500).send(error); /* sends an internal server error if something goes wrong */
         else {
@@ -270,7 +274,7 @@ const update_ingredient_sql = `
 `
 /* define a route for ingredient UPDATE */
 app.post("/inventory/ingredient/:id", ( req, res ) => {
-    db.execute(update_ingredient_sql, [req.body.name, req.body.currentQuantity, req.body.purchaseQuantity, req.body.description, req.params.id, req.oidc.user.email], (error, results) => {
+    db.execute(update_ingredient_sql, [req.body.name, req.body.currentQuantity, req.body.purchaseQuantity, req.body.description, req.params.id, req.oidc.user.sub], (error, results) => {
         if (error)
             res.status(500).send(error); //Internal Server Error
         else {

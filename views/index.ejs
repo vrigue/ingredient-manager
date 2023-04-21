@@ -24,37 +24,8 @@
     <link rel="stylesheet" href="/stylesheets/homeStyle.css">
 </head>
 <body class = "purple lighten-5">
-    <!-- Nav Bar -->
-    <header>
-        <nav>
-            <div class="nav-wrapper purple lighten-3">
-                <a href="/" class="brand-logo">Ingredient Manager</a>
-                <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                <ul id="desktop-nav" class="right hide-on-med-and-down">
-                    <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
-                    <li><a href="/inventory"><i class="material-icons left">list</i>Inventory</a></li>
-                    <% if (isLoggedIn) { %>
-                        <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
-                        <li><a href="/logout" class="waves-effect waves-light btn purple accent-4">Logout</a></li>                        
-                    <% } else { %>
-                        <li><a href="/login" class="waves-effect waves-light btn purple accent-3">Login</a></li>
-                    <% } %>
-                </ul>
-            </div>
-        </nav>
-        <ul id="mobile-nav" class="sidenav">
-             <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
-             <li><a href="/inventory"><i class="material-icons left">list</i>Inventory</a></li>
-             <% if (isLoggedIn) { %>
-                <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
-                <li><a href="/logout" class="waves-effect waves-light btn purple accent-4">Logout</a></li>                        
-            <% } else { %>
-                <li><a href="/login" class="waves-effect waves-light btn purple accent-3">Login</a></li>
-            <% } %>
-        </ul>
-    </header>
-
-    <!-- Rest of the Body -->
+    <%- include("partials/navbar") %>
+    
     <div class = "container center-align">
         <h1>Welcome to the Ingredient Manager!</h1>
         <h3>This will help you manage your bulk inventory of ingredients for cooking and baking!</h3>
